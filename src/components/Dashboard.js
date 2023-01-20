@@ -16,8 +16,9 @@ import FilterComp from "./FilterComp";
 import "../styles/Dashboard.css";
 import { Routes } from "./../Utils/Routes";
 import { createData, createModelData } from "../Utils/createDatamodels";
+import { FadeLoader } from "react-spinners";
 
-const Dashboard = () => {
+const Dashboard = ({ isLoading }) => {
   //fetched data
   const [data, setData] = useState([]);
   const [slicedData, setSlicedData] = useState([]);
@@ -183,68 +184,75 @@ const Dashboard = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {tableData &&
-                  tableData.map((row, i) => (
-                    <TableRow
-                      key={i}
-                      onClick={() => {
-                        showModal();
-                        const newData = modelData.find(
-                          (e) => e.flightnumber === row.index
-                        );
-                        setModelnewData(newData);
-                        console.log(newData);
-                      }}
-                    >
-                      <TableCell sx={{ border: "none", textAlign: "center" }}>
-                        {row.index}
-                      </TableCell>
-                      <TableCell sx={{ border: "none" }}>
-                        {DateConversion(row.launchedDate)}
-                      </TableCell>
-                      <TableCell sx={{ border: "none", textAlign: "center" }}>
-                        {row.location}
-                      </TableCell>
-                      <TableCell sx={{ border: "none", textAlign: "center" }}>
-                        {row.mission}
-                      </TableCell>
-                      <TableCell sx={{ border: "none", textAlign: "center" }}>
-                        {row.orbit}
-                      </TableCell>
-                      <TableCell sx={{ border: "none", textAlign: "center" }}>
-                        {row.upcoming ? (
-                          <Chip
-                            label="Upcoming"
-                            sx={{
-                              backgroundColor: " rgba(255, 255, 0, 0.27)",
-                              color: "orange",
-                            }}
-                          />
-                        ) : row.launchedStatus ? (
-                          <Chip
-                            label="Success"
-                            sx={{
-                              backgroundColor: "rgba(0, 128, 0, 0.452)",
-                              color: "green",
-                            }}
-                          />
-                        ) : (
-                          <Chip
-                            label="Failed"
-                            sx={{
-                              backgroundColor: "rgba(255, 0, 0, 0.307)",
-                              color: "rgba(255, 0, 0)",
-                            }}
-                          />
-                        )}
-                      </TableCell>
-                      <TableCell sx={{ border: "none" }}>
-                        {row.rocket}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
+
+              {isLoading ? (
+                <div className="loader_div">
+                  <FadeLoader color="#090909" />
+                </div>
+              ) : (
+                <TableBody>
+                  {tableData &&
+                    tableData.map((row, i) => (
+                      <TableRow
+                        key={i}
+                        onClick={() => {
+                          showModal();
+                          const newData = modelData.find(
+                            (e) => e.flightnumber === row.index
+                          );
+                          setModelnewData(newData);
+                          console.log(newData);
+                        }}
+                      >
+                        <TableCell sx={{ border: "none", textAlign: "center" }}>
+                          {row.index}
+                        </TableCell>
+                        <TableCell sx={{ border: "none" }}>
+                          {DateConversion(row.launchedDate)}
+                        </TableCell>
+                        <TableCell sx={{ border: "none", textAlign: "center" }}>
+                          {row.location}
+                        </TableCell>
+                        <TableCell sx={{ border: "none", textAlign: "center" }}>
+                          {row.mission}
+                        </TableCell>
+                        <TableCell sx={{ border: "none", textAlign: "center" }}>
+                          {row.orbit}
+                        </TableCell>
+                        <TableCell sx={{ border: "none", textAlign: "center" }}>
+                          {row.upcoming ? (
+                            <Chip
+                              label="Upcoming"
+                              sx={{
+                                backgroundColor: " rgba(255, 255, 0, 0.27)",
+                                color: "orange",
+                              }}
+                            />
+                          ) : row.launchedStatus ? (
+                            <Chip
+                              label="Success"
+                              sx={{
+                                backgroundColor: "rgba(0, 128, 0, 0.452)",
+                                color: "green",
+                              }}
+                            />
+                          ) : (
+                            <Chip
+                              label="Failed"
+                              sx={{
+                                backgroundColor: "rgba(255, 0, 0, 0.307)",
+                                color: "rgba(255, 0, 0)",
+                              }}
+                            />
+                          )}
+                        </TableCell>
+                        <TableCell sx={{ border: "none" }}>
+                          {row.rocket}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              )}
             </Table>
           </TableContainer>
         </Box>
