@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@500&family=Roboto&display=swap');
+
+*
+{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-select:not(:where(.css-dev-only-do-not-override-1i9hnpv).ant-select-customize-input) .ant-select-selector {
+  position: relative;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
