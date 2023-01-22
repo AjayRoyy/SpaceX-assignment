@@ -187,7 +187,7 @@ const Dashboard = ({ isLoading }) => {
 
               {isLoading ? (
                 <div className="loader_div">
-                  <FadeLoader color="#090909" />
+                  <FadeLoader color="grey" />
                 </div>
               ) : (
                 <TableBody>
